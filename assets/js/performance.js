@@ -97,19 +97,21 @@
 
     //Resource API
     var resourceTimings;
+    setTimeout(function(){
+        if (performance && typeof performance.getEntriesByType === 'function') {
+            resourceTimings = performance.getEntriesByType('resource');
 
-    if (performance && typeof performance.getEntriesByType === 'function') {
-        resourceTimings = performance.getEntriesByType('resource');
+            for (var i = 0; i < resourceTimings.length; i++) {
+                var item = resourceTimings[i];
+                console.log('name:' + item.name);
+                console.log('entryType:' + item.entryType);
+                console.log('name:' + item.name);
+                console.log('responseTime:' + (item.responseEnd - item.responseStart));
+                console.log('allTime:' + (item.responseEnd-item.redirectStart),"color:green;");
+            };
 
-        for (var i = 0; i < resourceTimings.length; i++) {
-            var item = resourceTimings[i];
-            console.log('name:' + item.name);
-            console.log('entryType:' + item.entryType);
-            console.log('name:' + item.name);
-            console.log('responseTime:' + (item.responseEnd - item.responseStart));
-            console.log('allTime:' + (item.responseEnd-item.redirectStart));
-        };
-
-    }
+        }
+    },1100)
+   
 
 }(this);
