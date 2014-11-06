@@ -105,7 +105,6 @@
                 var item = resourceTimings[i];
                 console.log('name:' + item.name);
                 console.log('entryType:' + item.entryType);
-                console.log('name:' + item.name);
                 console.log('responseTime:' + (item.responseEnd - item.responseStart));
                 console.log('allTime:' + (item.responseEnd-item.redirectStart));
                 console.log('----------------------------');
