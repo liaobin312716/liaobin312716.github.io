@@ -90,5 +90,5 @@
         }else{
             console.log('no performance api');
         }
-    }, 500);
+    }, 1000);
 }(this);
