@@ -91,4 +91,25 @@
             console.log('no performance api');
         }
     }, 1000);
+
+
+
+
+    //Resource API
+    var resourceTimings;
+
+    if (performance && typeof performance.getEntriesByType === 'function') {
+        resourceTimings = performance.getEntriesByType('resource');
+
+        for (var i = 0; i < resourceTimings.length; i++) {
+            var item = resourceTimings[i];
+            console.log('name:' + item.name);
+            console.log('entryType:' + item.entryType);
+            console.log('name:' + item.name);
+            console.log('responseTime:' + (item.responseEnd - item.responseStart));
+            console.log('allTime:' + (item.responseEnd-item.redirectStart));
+        };
+
+    }
+
 }(this);
