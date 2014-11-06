@@ -107,7 +107,7 @@
                 console.log('entryType:' + item.entryType);
                 console.log('name:' + item.name);
                 console.log('responseTime:' + (item.responseEnd - item.responseStart));
-                console.log('allTime:' + (item.responseEnd-item.redirectStart),"color:green;");
+                console.log('allTime:' + (item.responseEnd-item.redirectStart)+'','color:green;');
             };
 
         }
