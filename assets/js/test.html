@@ -1,0 +1,168 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>ES6 新特性</title>
+		<style type="text/css">
+			body{background: #000;}
+			#container,#container1,#container2,#container3{width: 250px;height: 60px;margin: 50px auto;}
+			.lilght{width: 50px;height: 50px;border-radius: 25px;margin: 5px 10px;float: left;opacity: 0.3;}
+			.red {
+			  background: red;
+			}
+
+			.yellow {
+			  background: yellow;
+			}
+
+			.green {
+			  background: lime;
+			}
+			.green-a >.green, .yellow-a >.yellow, .red-a >.red{opacity: 1;}
+
+			.tip{height: 50px;line-height: 50px;padding-left: 10px; background: #fff;font-weight: bold; color: #333;}
+		</style>
+	</head>
+	<body>
+		<div class="tip">一、回调方式基础版</div>
+		<div id="container">
+			<div class="lilght green"></div>
+			<div class="lilght yellow"></div>
+			<div class="lilght red"></div>
+		</div>
+
+		<div class="tip">二、回调方式升级版</div>
+		<div id="container1">
+			<div class="lilght green"></div>
+			<div class="lilght yellow"></div>
+			<div class="lilght red"></div>
+		</div>
+
+		<div class="tip">三、Promise</div>
+		<div id="container2">
+			<div class="lilght green"></div>
+			<div class="lilght yellow"></div>
+			<div class="lilght red"></div>
+		</div>
+
+		<div class="tip">四、Generator</div>
+		<div id="container3">
+			<div class="lilght green"></div>
+			<div class="lilght yellow"></div>
+			<div class="lilght red"></div>
+		</div>
+
+		<script type="text/javascript" src="browser.min.js"></script>
+		<script type="text/javascript">
+			var container =document.getElementById('container');
+			var container1 =document.getElementById('container1');
+			var container3 =document.getElementById('container3');
+
+
+			/**
+				回调版本
+			*/
+				var colors = ['green','yellow','red'] ;
+				function turn1 (color,time) {
+					container.className= color + '-a';
+					var index = (colors.indexOf(color) + 1) % 3;
+					setTimeout(turn1.bind(null,colors[index], time),time)
+				}
+
+				turn1('green',1500);
+
+			function turn(color, time , callback){
+				container1.className= color + '-a';
+				setTimeout(callback,time);
+			}
+			(function(){
+				turn('green', 1500,
+					turn.bind(null,'yellow',800,
+						turn.bind(null,'red',1500,arguments.callee)
+						)
+					)
+			})()   // 开始
+
+
+
+			function turn2(color){
+			    container3.className = color + '-a';
+			}
+
+			function wait(d){
+			    return new Promise(function(resolve, reject) {
+			        setTimeout(resolve,d);
+			    })
+			}
+
+			function run(generator) {
+				var it = generator();
+			    void function () {
+			    	var curr = it.next();
+			        
+			        if(curr.done) {
+			            return ;
+			        }
+			        if(curr.value instanceof Promise) {
+			            curr.value.then(arguments.callee);
+			        } else {
+			        	arguments.callee();
+			        }
+			    }();
+			}
+			//执行！
+			run(function*(){
+			    for(;;) {
+			    	yield turn2('green');
+			    	yield wait(1500);
+			    	yield turn2('yellow');
+			    	yield wait(800);
+			    	yield turn2('red');
+			    	yield wait(1500);
+			    }
+			});
+		</script>
+		<script type="text/babel">
+	
+
+			var container2 =document.getElementById('container2');
+			var container3 =document.getElementById('container3');
+
+
+		// Promise 版本
+
+			var turn = (color,time) => new Promise((resolve,reject) => {
+				container2.className=`${color}-a`;
+				setTimeout(resolve,time)
+			});
+			var run = () => {
+			    turn('green', 1500)
+			    .then(turn.bind(null,'yellow', 800))
+			    .then(turn.bind(null,'red', 1500))
+			    .then(run);
+			}
+			run()
+
+
+			/*
+		function*fibonacci() {
+			var previous = 0, 
+				current = 1;
+			while (true) {
+				var temp = previous;
+				previous = current;
+				current = temp + current;
+				yield current;
+			}
+		}
+		for(var i of fibonacci()) {
+			console.log(i);
+		}
+			*/
+
+			
+
+
+
+		</script>
+	</body>
+</html>
