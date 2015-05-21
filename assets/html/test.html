@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>字符串编码</title>
+		<style type="text/css">
+			#src-text, #des-text{width: 500px;height: 100px;}
+			.result{width: 500px;height: 100px;border: 1px #ccc solid;}
+		</style>
+	</head>
+	<body>
+		<h2>源字符串</h2>
+		<textarea name="src-text" id="src-text"></textarea>
+		<h2>目标字符串</h2>
+		<textarea name="src-text" id="des-text"></textarea>
+		</div><br><br><br><br>
+		<div><button id="encode" >Encode编码</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="decode">Decode解码</button></div>
+		<script type="text/javascript">
+			window.onload = function(e) {
+				document.getElementById('encode').onclick = function(e) {
+					document.getElementById('des-text').value = encodeURIComponent(document.getElementById('src-text').value);
+				}
+
+				document.getElementById('encode').onClick = function(e) {
+					document.getElementById('des-text').value = decodeURIComponent(document.getElementById('src-text').value);
+				}
+			}
+		</script>
+	</body>
+</html>
