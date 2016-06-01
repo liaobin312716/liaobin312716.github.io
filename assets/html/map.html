@@ -26,9 +26,11 @@
     map.centerAndZoom(point, 15);
 
     var circle = new BMap.Circle(point,500,{
-      strokeColor:"blue",
-      strokeWeight:2,
-      strokeOpacity:0.5
+      strokeColor:"#337aff",
+      strokeWeight:1,
+      fillColor:'#0048ff',
+      fillOpacity:'0.1'
+
     }); //创建圆
 
     map.addOverlay(circle);            //增加圆
