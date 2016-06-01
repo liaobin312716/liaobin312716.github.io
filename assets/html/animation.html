@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>动画测试</title>
+    <style>
+      .demo-box{
+        width: 400px;
+        height: 200px;
+        border: 1px #eaeaea solid;
+      }
+
+      /**** 第一只小熊 ****/
+      .bear{
+        width: 70px;
+        height: 100px;
+        margin: 50px;
+        background: url('image/demo.png') no-repeat;
+        background-size: 147px 100px;
+        background-position: 0 0;
+      }
+      .bear.eyes{
+        background-position: -73px 0;
+      }
+
+      /** 第css3 bug 小熊 **/
+
+      .bear1{
+        -webkit-animation-name:bear;
+        -webkit-animation-duration:1000ms;
+        -webkit-animation-timing-function:linear;
+        -webkit-animation-iteration-count:infinite;
+      }
+      @-webkit-keyframes bear {
+        0% {background-position: 0 0;}
+        49.9% {background-position: 0 0;}
+        50% {background-position: -73px 0;}
+        100% {background-position: -73px 0;}
+      }
+
+      /** css3 修正版小熊 **/
+
+      .bear4{
+        -webkit-animation-name:bear4;
+        -webkit-animation-duration:1000ms;
+        -webkit-animation-timing-function:steps(2);
+        -webkit-animation-iteration-count:infinite;
+      }
+      @-webkit-keyframes bear4 {
+        0% {background-position: 0 0;}
+        100% {background-position: -147px 0;}
+      }
+    </style>
+  </head>
+  <body>
+    <h5>1. setTimeout , setInterval</h5>
+    <div class="demo-box demo1">
+      <div class="bear"></div>
+    </div>
+
+    <h5>2. css3 animation</h5>
+    <div class="demo-box demo2">
+      <div class="bear bear1"></div>
+    </div>
+
+    <h5>3. requestAnimationFrame</h5>
+    <div class="demo-box demo3">
+      <div class="bear"></div>
+    </div>
+
+    <h5>4. css3 animation 升级版</h5>
+    <div class="demo-box demo4">
+      <div class="bear bear4"></div>
+    </div>
+
+    <script src="lib/zepto.js"></script>
+    <script>
+
+    $(function() {
+      /** setTimeout **/
+      var $bear1 = $('.demo1 .bear');
+      start($bear1);
+      function start($ele) {
+        $ele.toggleClass('eyes');
+        setTimeout(()=>{
+          start($ele);
+        },600);
+      }
+
+      /** requestAnimationFrame **/
+
+      var $bear3 = $('.demo3 .bear');
+      var lastTime = Date.now();
+      var requestAnimationFrame = window.requestAnimationFrame
+        || window.mozRequestAnimationFrame
+        || window.webkitRequestAnimationFrame
+        || window.msRequestAnimationFrame
+        || window.oRequestAnimationFrame
+        || function(callback) {
+          setTimeout(callback, 1000 / 60);
+        };
+
+        function rafStart(){
+          var now = Date.now();
+          if(now - lastTime >= 1000) {
+            $bear3.toggleClass('eyes');
+            lastTime = Date.now();
+          } // 一秒执行一次
+          requestAnimationFrame(rafStart);
+        }
+
+        rafStart($bear3);
+
+
+
+
+    })
+
+
+/**
+setTimeout(()=>{
+        $ele.addClass('eyes');
+        setTimeout(()=>{
+          $ele.removeClass('eyes');
+        },600);
+        setTimeout(()=>{
+          me.startRider($ele)
+        },1200);
+      },delay)
+**/
+
+    </script>
+  </body>
+</html>
