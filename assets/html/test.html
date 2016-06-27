@@ -20,6 +20,7 @@
 		<script type="text/javascript">
 			window.onload = function(e) {
 				document.getElementById('encode').onclick = function(e) {
+					alert('原生弹窗');
 					document.getElementById('des-text').value = encodeURIComponent(document.getElementById('src-text').value);
 				}
 
