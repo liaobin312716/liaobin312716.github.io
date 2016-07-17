@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width,minimum-scale=1.00001,maximum-scale=1.00001,shrink-to-fit=no,user-scalable=no,minimal-ui" name="viewport">
+
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta content="telephone=no" name="format-detection">
+<!-- UC默认竖屏 ，UC强制全屏 -->
+<meta name="full-screen" content="yes">
+<meta name="browsermode" content="application">
+<!-- QQ强制竖屏 QQ强制全屏 -->
+<meta name="x5-orientation" content="portrait">
+<meta name="x5-fullscreen" content="true">
+<meta name="x5-page-mode" content="app">
+		<title>分享测试</title>
+		<style type="text/css">
+			
+		</style>
+	</head>
+	<body>
+	  
+		<h5>分享测试</h5>
+		<p>快分享我吧</p>
+		
+		<button id="share">点击分享</button>
+		
+		<iframe id="schemeFrame" src="" style="display:none"></iframe>
+		
+		<script type="text/javascript">
+	    var frame = document.getElementById('schemeFrame');
+	    var shareBtn = document.getElementById('share');
+	    
+	    shareBtn.onclick = function(e){
+	      frame.src = "bdwm://native?pageName=share&imageUrl=http%3A%2F%2Fgeekparks.com%2Fassets%2Fimages%2Fbanner.jpg&title=分享测试&description=分享测试描述描述&linkUrl=http%3A%2F%2Fwaimai.baidu.com%2Fhuodong%2Fgeneraldetail%3Fhuodong_id%3D907%26from%3Dwebapp%26third_party%3Dwmapp"
+	    }
+		</script>
+	</body>
+</html>

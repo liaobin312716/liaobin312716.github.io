@@ -14,9 +14,13 @@
 		<textarea name="src-text" id="des-text"></textarea>
 		</div><br><br><br><br>
 		<div><button id="encode" >Encode编码</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="decode">Decode解码</button></div>
+		
+		<img src="http://img.waimai.bdimg.com/pb/2e8aae1171b4be48f3973e8b2a2f7b70d7" />
+		
 		<script type="text/javascript">
 			window.onload = function(e) {
 				document.getElementById('encode').onclick = function(e) {
+					alert('原生弹窗');
 					document.getElementById('des-text').value = encodeURIComponent(document.getElementById('src-text').value);
 				}
 
